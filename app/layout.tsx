@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,26 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body>
+        <header className="bg-white border-b border-gray-200 px-8 py-4 sticky top-0 z-50 shadow-sm flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold text-blue-500 tracking-tight">TokoOnlineKu</span>
+          </div>
+        </header>
+        <div className="flex flex-1 min-h-screen">
+          <aside className="w-64 bg-white border-r border-gray-200 p-6 flex flex-col gap-2 shadow-sm">
+            <p className="mb-5 text-xs font-semibold uppercase tracking-wider text-blue-500">Menu</p>
+            <nav className="flex flex-col gap-1">
+              <Link href="/" className="px-4 py-2.5 rounded-xl font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all">Home</Link>
+              <Link href="/produk" className="px-4 py-2.5 rounded-xl font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-all">Katalog Produk</Link>
+            </nav>
+          </aside>
+          <main className="flex-1 p-5">{children}</main>
+        </div>
+        <footer className="bg-white border-t border-gray-200 py-4 text-center text-sm text-gray-500">
+          <p> Toko Online Ku. All rights reserved.</p>
+        </footer>
+      </body>
     </html>
   );
 }
